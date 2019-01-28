@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  frontend-only:
+      build: ./
+      image: angular
+      container_name: frontangular
+      volumes:
+       - ./src/:/app/src/
+       - ./app/node_modules
+        #- ./frontend/dist/:/app/dist
+      #environment:
+      #  DB_PORT: 3306
+      #  DB_HOST: database
+      ports:
+        - "4200:4200"
+      expose:
+        - "4200"
+      command: "npm start"

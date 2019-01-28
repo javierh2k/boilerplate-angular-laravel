@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  backend:
+    build:
+      context: ./
+      dockerfile: app.Dockerfile
+    image: larang-api
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    #environment:
+    #  DB_PORT: 3306
+    #  DB_HOST: database
+
+  redis:
+    image: redis:4.0.10
+    container_name: larang-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      #- redis-data:/data
+      - ../data/redis:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+
+  web:
+    build:
+      context: ./
+      dockerfile: web.Dockerfile
+    container_name: larang-web
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - 8080:80
+
+  database:
+    image: mysql:5.7
+    container_name: larang-mysql
+    volumes:
+      - ../data/mysql:/var/lib/mysql
+    #  - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: laravel_api
+    ports:
+      - 3306:3306
+
+#volumes:
+#  dbdata:
+#  redis-data:
