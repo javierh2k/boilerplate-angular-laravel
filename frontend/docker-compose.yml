@@ -2,17 +2,14 @@ version: '3'
 
 services:
 
-  frontend-only:
+  frontend:
       build: ./
       image: angular
-      container_name: frontangular
+      container_name: frontend-angular
       volumes:
        - ./src/:/app/src/
        - ./app/node_modules
         #- ./frontend/dist/:/app/dist
-      #environment:
-      #  DB_PORT: 3306
-      #  DB_HOST: database
       ports:
         - "4200:4200"
       expose:

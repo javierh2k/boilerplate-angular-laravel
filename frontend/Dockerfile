@@ -13,6 +13,7 @@ RUN apk update \
   /usr/share/man \
   /tmp/*
 
+RUN npm config set registry "http://registry.npmjs.org"
 WORKDIR /app
 
 #COPY proyect
@@ -20,7 +21,7 @@ COPY . .
 
 # Install all the packages
 RUN npm install -g @angular/cli
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 #-- production to production server
 
 EXPOSE 4200
