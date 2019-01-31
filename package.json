@@ -10,7 +10,7 @@
     "backend:only": "docker-compose -f ./backend/docker-compose.yml -p backend up -d",
     "backend:stop": "cd backend && docker-compose down --remove-orphans",
     "backend:migration": "cd backend && docker-compose exec backend php artisan key:generate && docker-compose exec backend php artisan config:cache && docker-compose exec backend php artisan migrate",
-    "frontend:only": "docker-compose -f ./frontend/docker-compose.yml -p backend up -d",
+    "frontend:only": "docker-compose -f ./frontend/docker-compose.yml -p frontend up -d",
     "frontend:stop": "cd frontend && docker-compose down --remove-orphans"
   }
 }
