@@ -28,7 +28,7 @@ services:
         - "4200:4200"
       expose:
         - 4200
-      command: "npm start"
+      command: "npm start &"
 
   redis:
     image: redis:4.0.10

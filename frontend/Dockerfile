@@ -26,5 +26,6 @@ RUN yarn install --network-timeout 1000000
 
 EXPOSE 4200
 
-CMD ["yarn", "start"]
+CMD npm start &
+#["yarn", "start", " & "]
 #start to production

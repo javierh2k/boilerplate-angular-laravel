@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "all": "docker-compose up -d",
+    "all": "docker-compose up -d ",
     "permission": " cd backend && sudo chmod -R 777 bootstrap/cache/ &&    sudo chmod -R 777 storage/ ",
     "all:migration": "docker-compose exec backend php artisan key:generate && docker-compose exec backend php artisan config:cache && docker-compose exec backend php artisan migrate",
-    "all:stop": "docker-compose down --remove-orphans",
-    "backend:only": "docker-compose -f ./backend/docker-compose.yml -p backend up -d",
-    "backend:stop": "cd backend && docker-compose down --remove-orphans",
+    "all:down": "docker-compose down --remove-orphans",
+    "backend": "docker-compose -f ./backend/docker-compose.yml -p backend up -d",
+    "backend:down": "cd backend && docker-compose down --remove-orphans",
     "backend:migration": "cd backend && docker-compose exec backend php artisan key:generate && docker-compose exec backend php artisan config:cache && docker-compose exec backend php artisan migrate",
-    "frontend:only": "docker-compose -f ./frontend/docker-compose.yml -p frontend up -d",
-    "frontend:stop": "cd frontend && docker-compose down --remove-orphans"
+    "frontend": "export DOCKER_CLIENT_TIMEOUT=120 &&  export COMPOSE_HTTP_TIMEOUT=120 && docker-compose -f ./frontend/docker-compose.yml -p frontend up -d ",
+    "frontend:debug": "export DOCKER_CLIENT_TIMEOUT=120 &&  export COMPOSE_HTTP_TIMEOUT=120 && docker-compose -f ./frontend/docker-compose.yml -p frontend up ",
+    "frontend:down": "cd frontend && docker-compose down --remove-orphans"
   }
 }
